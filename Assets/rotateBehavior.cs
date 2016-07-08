@@ -3,7 +3,7 @@ using System.Collections;
 
 public class rotateBehavior : MonoBehaviour 
 {
-
+	public Transform baobab;
 	private float _sensitivity;
 	private Vector3 _mouseReference;
 	private Vector3 _mouseOffset;
@@ -18,12 +18,12 @@ public class rotateBehavior : MonoBehaviour
 
 	void Update()
 	{
-//		if (Input.GetMouseButtonDown (0)) {
-//			_isRotating = true;
-//			_mouseReference = Input.mousePosition;
-//		} else if (Input.GetMouseButtonUp (0)) {
-//			_isRotating = false;
-//		}
+		if (Input.GetMouseButtonDown (0)) {
+			_isRotating = true;
+			_mouseReference = Input.mousePosition;
+		} else if (Input.GetMouseButtonUp (0)) {
+			_isRotating = false;
+		}
 
 		if(_isRotating)
 		{
@@ -37,21 +37,6 @@ public class rotateBehavior : MonoBehaviour
 			// store mouse
 			_mouseReference = Input.mousePosition;
 		}
-	}
-
-	void OnMouseDown()
-	{
-		// rotating flag
-		_isRotating = true;
-
-		// store mouse
-		_mouseReference = Input.mousePosition;
-	}
-
-	void OnMouseUp()
-	{
-		// rotating flag
-		_isRotating = false;
 	}
 
 }
