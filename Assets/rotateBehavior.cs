@@ -14,6 +14,9 @@ public class rotateBehavior : MonoBehaviour
 	{
 		_sensitivity = 0.4f;
 		_rotation = Vector3.zero;
+		Vector3 spawnPosition = Random.onUnitSphere * ((gameObject.transform.localScale.x/2) + baobab.transform.localScale.y * 0.5f) + gameObject.transform.position;
+		GameObject newBaobab = Instantiate(baobab, spawnPosition, Quaternion.identity) as GameObject;
+		newBaobab.transform.parent = gameObject.transform;
 	}
 
 	void Update()
