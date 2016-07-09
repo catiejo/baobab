@@ -14,9 +14,7 @@ public class rotateBehavior : MonoBehaviour
 	{
 		_sensitivity = 0.4f;
 		_rotation = Vector3.zero;
-		Vector3 spawnPosition = Random.onUnitSphere * ((gameObject.transform.localScale.x/2) + baobab.transform.localScale.y * 0.5f) + gameObject.transform.position;
-		Transform newBaobab = Instantiate(baobab, spawnPosition, Quaternion.identity) as Transform;
-		newBaobab.gameObject.transform.parent = gameObject.transform;
+		InvokeRepeating("plantBaobab", 0, 5F);
 	}
 
 	void Update()
@@ -40,6 +38,13 @@ public class rotateBehavior : MonoBehaviour
 			// store mouse
 			_mouseReference = Input.mousePosition;
 		}
+	}
+
+	void plantBaobab ()
+	{
+		Vector3 spawnPosition = Random.onUnitSphere * ((gameObject.transform.localScale.x / 2) + baobab.transform.localScale.y * 0.5f) + gameObject.transform.position;
+		Transform newBaobab = Instantiate (baobab, spawnPosition, Quaternion.identity) as Transform;
+		newBaobab.gameObject.transform.parent = gameObject.transform;
 	}
 
 }
