@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class BaobabTrunkBehavior : MonoBehaviour 
@@ -14,6 +14,7 @@ public class BaobabTrunkBehavior : MonoBehaviour
 
 	IEnumerator ScaleOverTime(float time)
 	{
+//		gameObject.transform.localScale = Vector3(0, 0, 0);
 		Vector3 originalScale = gameObject.transform.localScale;
 		Vector3 destinationScale = new Vector3(0.25f, 0.25f, 0.25f);
 
