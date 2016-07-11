@@ -15,7 +15,9 @@ public class planetBehavior : MonoBehaviour
 	{
 		Transform newBaobab = Instantiate (baobab) as Transform;
 		newBaobab.parent = gameObject.transform;
-		newBaobab.localPosition = Random.onUnitSphere * (0.5f + newBaobab.localScale.y * 0.5f);
+		newBaobab.localPosition = Random.onUnitSphere * (0.6f + newBaobab.localScale.y * 0.5f);
+		newBaobab.LookAt(gameObject.transform.position);
+		newBaobab.rotation = newBaobab.transform.rotation * Quaternion.Euler(-90, 0, 0);
 	}
 
 }
