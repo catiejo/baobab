@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class galaxyBehavior : MonoBehaviour 
+public class GalaxyBehavior : MonoBehaviour 
 {
 	private float _sensitivity;
 	private Vector3 _mouseReference;
@@ -26,14 +26,13 @@ public class galaxyBehavior : MonoBehaviour
 
 		if(_isRotating)
 		{
-			// offset
+			// Offset
 			_mouseOffset = (Input.mousePosition - _mouseReference);
-			// apply rotation
+			// Apply rotation
 			_rotation.y = -(_mouseOffset.x) * _sensitivity;
 			_rotation.x = (_mouseOffset.y) * _sensitivity;
-			// rotate
 			transform.Rotate(_rotation, relativeTo:Space.World);
-			// store mouse
+			// Store mouse
 			_mouseReference = Input.mousePosition;
 		}
 	}
