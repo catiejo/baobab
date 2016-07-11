@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class baobabBehavior : MonoBehaviour 
+public class BaobabTrunkBehavior : MonoBehaviour 
 {
 	void Start () 
 	{

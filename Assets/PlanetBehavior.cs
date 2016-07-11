@@ -16,7 +16,6 @@ public class PlanetBehavior : MonoBehaviour
 		Transform newBaobab = Instantiate (baobab) as Transform;
 		newBaobab.parent = gameObject.transform;
 		newBaobab.localPosition = Random.onUnitSphere * (0.6f + newBaobab.localScale.y * 0.5f);
-		// Position baobab to be facing center of planet
 		newBaobab.LookAt(gameObject.transform.position);
 		newBaobab.rotation = newBaobab.transform.rotation * Quaternion.Euler(-90, 0, 0);
 	}
