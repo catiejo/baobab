@@ -14,8 +14,7 @@ public class BaobabTrunkBehavior : MonoBehaviour
 
 	IEnumerator ScaleOverTime(float time)
 	{
-//		gameObject.transform.localScale = Vector3(0, 0, 0);
-		Vector3 originalScale = gameObject.transform.localScale;
+		Vector3 originalScale = new Vector3((gameObject.transform.localScale.x * 0.1f), (gameObject.transform.localScale.y * 0.3f), (gameObject.transform.localScale.z * 0.1f));
 		Vector3 destinationScale = new Vector3(0.25f, 0.25f, 0.25f);
 
 		float currentTime = 0.0f;
