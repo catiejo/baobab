@@ -1,0 +1,17 @@
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/catiejopidel/Code/Baobab/obj/Debug/Assembly-CSharp.dll
+/Users/catiejopidel/Code/Baobab/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/UnityEngine.dll
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/UnityEditor.dll
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/Mono.Cecil.dll
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/Unity.DataContract.dll
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/catiejopidel/Code/Baobab/Temp/bin/Debug/Mono.Cecil.Mdb.dll

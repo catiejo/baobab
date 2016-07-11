@@ -2,7 +2,6 @@ Library
 Temp
 Web
 AssetTests
-obj
 *.userprefs
 *.csproj
 *.sln
