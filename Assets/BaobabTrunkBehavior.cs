@@ -3,13 +3,16 @@ using System.Collections;
 
 public class BaobabTrunkBehavior : MonoBehaviour 
 {
+	bool isPickable = true;
 	void Start () 
 	{
 		StartCoroutine(ScaleOverTime(5));
 	}
 	void OnMouseDown()
 	{
-		Destroy (gameObject);
+		if (isPickable) {
+			Destroy (gameObject);
+		}
 	}
 
 	IEnumerator ScaleOverTime(float time)
@@ -36,6 +39,8 @@ public class BaobabTrunkBehavior : MonoBehaviour
 			currentTime += Time.deltaTime;
 			yield return null;
 		} while (currentTime <= girthTime);
+
+		isPickable = false;
 
 	}
 
