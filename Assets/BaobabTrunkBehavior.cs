@@ -3,15 +3,23 @@ using System.Collections;
 
 public class BaobabTrunkBehavior : MonoBehaviour 
 {
+	private GameControllerBehavior controller;
 	bool isPickable = true;
 	void Start () 
 	{
 		StartCoroutine(ScaleOverTime(5));
+		GameObject controllerObject = GameObject.FindWithTag ("GameController");
+		if (controllerObject != null) {
+			controller = controllerObject.GetComponent<GameControllerBehavior> ();
+		} else {
+			Debug.Log ("Cannot find game controller...waa waa waaaaaaa");
+		}
 	}
 	void OnMouseDown()
 	{
 		if (isPickable) {
 			Destroy (gameObject);
+			controller.updateScore ();
 		}
 	}
 
