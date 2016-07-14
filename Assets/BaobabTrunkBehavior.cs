@@ -26,9 +26,9 @@ public class BaobabTrunkBehavior : MonoBehaviour
 	IEnumerator ScaleOverTime(float time)
 	{
 		float girthTime = 2f;
-		Vector3 babyScale = new Vector3(0.02f, 0.06f, 0.02f); // Cute little baobab
-		Vector3 saplingScale = new Vector3(0.15f, 0.25f, 0.15f); // Sappling baobab
-		Vector3 finalScale = new Vector3(0.25f, 0.25f, 0.25f); // Thicker, adult baobab
+		Vector3 babyScale = new Vector3(0.08f, 0.24f, 0.08f); // Cute little baobab
+		Vector3 saplingScale = new Vector3(0.6f, 1.0f, 0.6f); // Sappling baobab
+		Vector3 finalScale = new Vector3(1.0f, 1.0f, 1.0f); // Thicker, adult baobab
 
 		// Grow the whole tree
 		float currentTime = 0.0f;
