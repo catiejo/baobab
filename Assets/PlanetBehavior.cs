@@ -24,6 +24,7 @@ public class PlanetBehavior : MonoBehaviour
 			plantAttempts++;
 			Debug.Log ("failed to plant baobab #" + plantAttempts);
 		}
+		Destroy (newBaobab.gameObject);
 	}
 
 }
