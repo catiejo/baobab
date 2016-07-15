@@ -49,6 +49,7 @@ public class BaobabTrunkBehavior : MonoBehaviour
 		} while (currentTime <= girthTime);
 
 		isPickable = false;
+		controller.updateBaobads ();
 
 	}
 

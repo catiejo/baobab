@@ -6,14 +6,16 @@ public class GameControllerBehavior : MonoBehaviour {
 	public GUIText scoreText;
 	public PlanetBehavior planet;
 	private int score;
-	float nextPlant = 5.0F;
+	private int baobads;
+	float nextPlant = 2.0F;
+	int spawnCount = 1;
 
 	// Use this for initialization
 	void Start () {
-//		Invoke ("planet.plantBaobab()", 0); //Start by planting a baobab.
 		score = -1;
 		updateScore ();
-//		StartCoroutine (gameDifficulty());
+		baobads = 0;
+		StartCoroutine (gameDifficulty());
 	}
 
 	public void updateScore() {
@@ -21,14 +23,27 @@ public class GameControllerBehavior : MonoBehaviour {
 		scoreText.text = "Score: " + score;
 	}
 
-//	IEnumerator gameDifficulty () {
-//		if (score % 10 == 0) {
-//			nextPlant -= 0.5F;
-//		}
-//		yield return new WaitForSeconds (nextPlant);
-//		if (!planet.plantBaobab ()) {
-//			StopCoroutine (gameDifficulty());
-//			scoreText.text = "Game Over";
-//		}
-//	}
+	public void updateBaobads() {
+		baobads += 1;
+		Debug.Log ("fully grown baobabs: " + baobads);
+		if (baobads > 5) {
+			StopCoroutine (gameDifficulty ());
+			scoreText.text = "GAME OVER";
+		}
+	}
+
+	IEnumerator gameDifficulty () {
+		while (baobads <= 5) {
+			if ((score + 1) % 10 == 0) {
+				spawnCount++;
+			}
+			if ((score + 1) % 20 == 0) {
+				nextPlant -= Mathf.Max(nextPlant -0.5F, 0.5F);
+			}
+			for (int i = 0; i < spawnCount; i++) {
+				planet.plantBaobab ();
+			}
+			yield return new WaitForSeconds (nextPlant);
+		}
+	}
 }

@@ -5,12 +5,7 @@ public class PlanetBehavior : MonoBehaviour
 {
 	public Transform baobab;
 
-	void Start ()
-	{
-		InvokeRepeating("plantBaobab", 0, 5F);
-	}
-
-	void plantBaobab ()
+	public void plantBaobab ()
 	{
 		Transform newBaobab = Instantiate (baobab) as Transform;
 		newBaobab.parent = gameObject.transform;
