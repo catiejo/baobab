@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BaobabTrunkBehavior : MonoBehaviour 
+public class BaobabBehavior : MonoBehaviour 
 {
 	private GameControllerBehavior controller;
 	bool isPickable = true;

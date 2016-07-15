@@ -14,6 +14,7 @@ public class PlanetBehavior : MonoBehaviour
 		Transform newBaobab = Instantiate (baobab) as Transform;
 		newBaobab.parent = gameObject.transform;
 		while (plantAttempts < maxAttempts) {
+			//This OverlapSphere isn't working...why?
 			if (Physics.OverlapSphere (emptySpot, 0.45F).Length <= 1) {
 				newBaobab.localPosition = emptySpot;
 				// Position baobab to be facing center of planet
@@ -22,8 +23,8 @@ public class PlanetBehavior : MonoBehaviour
 				return;
 			}
 			plantAttempts++;
-			Debug.Log ("failed to plant baobab #" + plantAttempts);
 		}
+		Debug.Log ("failed to plant baobab");
 		Destroy (newBaobab.gameObject);
 	}
 
