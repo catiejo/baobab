@@ -27,7 +27,7 @@ public class BaobabBehavior : MonoBehaviour
 	{
 		float girthTime = 2f;
 		Vector3 babyScale = new Vector3(0.08f, 0.24f, 0.08f); // Cute little baobab
-		Vector3 saplingScale = new Vector3(0.6f, 1.0f, 0.6f); // Sappling baobab
+		Vector3 saplingScale = new Vector3(0.95f, 1.0f, 0.95f); // Sapling baobab
 		Vector3 finalScale = new Vector3(1.0f, 1.0f, 1.0f); // Thicker, adult baobab
 
 		// Grow the whole tree
