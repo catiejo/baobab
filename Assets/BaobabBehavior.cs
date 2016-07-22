@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BaobabBehavior : MonoBehaviour 
 {
+	public Material[] foliageColors;
+	public Renderer rend;
 	private GameControllerBehavior controller;
 	bool isPickable = true;
 	void Start () 
@@ -14,7 +16,19 @@ public class BaobabBehavior : MonoBehaviour
 		} else {
 			Debug.Log ("Cannot find game controller...waa waa waaaaaaa");
 		}
+
 	}
+
+	void changeFoliage(Material foliageColor) {
+		Renderer[] renderers = transform.GetComponentsInChildren<Renderer>();
+		foreach(Renderer r in renderers){
+			Debug.Log (r.transform.gameObject.tag);
+			if (r.transform.gameObject.tag == "foliage") {
+				r.material = foliageColor;
+			}
+		}
+	}
+
 	void OnMouseDown()
 	{
 		if (isPickable) {
@@ -38,6 +52,7 @@ public class BaobabBehavior : MonoBehaviour
 			currentTime += Time.deltaTime;
 			yield return null;
 		} while (currentTime <= time);
+		changeFoliage (foliageColors [0]);
 
 		// Reset time and grow the girth
 		currentTime = 0.0f;
@@ -49,6 +64,7 @@ public class BaobabBehavior : MonoBehaviour
 		} while (currentTime <= girthTime);
 
 		isPickable = false;
+		changeFoliage (foliageColors [1]);
 		controller.updateBaobads ();
 
 	}

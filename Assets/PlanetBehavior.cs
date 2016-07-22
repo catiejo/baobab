@@ -14,7 +14,7 @@ public class PlanetBehavior : MonoBehaviour
 
 		while (plantAttempts < maxAttempts) {
 			//This OverlapSphere isn't working...why?
-			if (Physics.OverlapSphere (transform.TransformPoint(emptySpot), 0.15F).Length <= 1) {
+			if (Physics.OverlapSphere (transform.TransformPoint(emptySpot), 0.3F).Length <= 1) {
 				Transform newBaobab = Instantiate (baobab) as Transform;
 				newBaobab.parent = gameObject.transform;
 				newBaobab.localPosition = emptySpot;
