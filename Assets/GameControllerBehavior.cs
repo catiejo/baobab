@@ -3,17 +3,20 @@ using System.Collections;
 
 public class GameControllerBehavior : MonoBehaviour {
 
+	public AudioSource music;
+	float musicVolume = 1.0F;
 	public GUIText scoreText;
 	public GameObject replayButton;
 	public PlanetBehavior planet;
 	private int score;
 	private int baobads;
-	float nextPlant = 2.0F;
+	float nextPlant = 3.24F;
 	int spawnCount = 1;
-	int spawnBump = 10;
+	int spawnBump = 12;
 
 	// Use this for initialization
 	void Start () {
+		music.Play();
 		replayButton.SetActive (false);
 		score = -1;
 		updateScore ();
@@ -31,6 +34,7 @@ public class GameControllerBehavior : MonoBehaviour {
 		if (baobads > 5) {
 			StopCoroutine (gameDifficulty ());
 			replayButton.SetActive (true);
+			StartCoroutine(fadeOut ());
 		}
 	}
 
@@ -46,5 +50,17 @@ public class GameControllerBehavior : MonoBehaviour {
 			}
 			yield return new WaitForSeconds (nextPlant);
 		}
+	}
+
+	IEnumerator fadeOut () {
+		musicVolume = 0.8F;
+		while (musicVolume > 0)
+		{
+			musicVolume = Mathf.Max(musicVolume - (0.15F * Time.deltaTime), 0);
+			music.volume = musicVolume;
+			Debug.Log ("volume should be " + musicVolume);
+			yield return new WaitForSeconds (0.0005F);
+		}
+		StopCoroutine (fadeOut ());
 	}
 }
