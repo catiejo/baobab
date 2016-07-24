@@ -10,6 +10,7 @@ public class GameControllerBehavior : MonoBehaviour {
 	public PlanetBehavior planet;
 	private int score;
 	private int baobads;
+	public int maxBaobads = 5;
 	float nextPlant = 3.24F;
 	int spawnCount = 1;
 	int spawnBump = 12;
@@ -26,12 +27,12 @@ public class GameControllerBehavior : MonoBehaviour {
 
 	public void updateScore() {
 		score += 1;
-		scoreText.text = "Score: " + score;
+		scoreText.text = "score: " + score;
 	}
 
 	public void updateBaobads() {
 		baobads += 1;
-		if (baobads > 5) {
+		if (baobads >= maxBaobads) {
 			StopCoroutine (gameDifficulty ());
 			replayButton.SetActive (true);
 			StartCoroutine(fadeOut ());
@@ -39,7 +40,7 @@ public class GameControllerBehavior : MonoBehaviour {
 	}
 
 	IEnumerator gameDifficulty () {
-		while (baobads < 5) {
+		while (baobads < maxBaobads) {
 			if ((score + 1) % spawnBump == 0) {
 				spawnCount++;
 				spawnBump *= 2;
@@ -58,7 +59,7 @@ public class GameControllerBehavior : MonoBehaviour {
 		{
 			musicVolume = Mathf.Max(musicVolume - (0.15F * Time.deltaTime), 0);
 			music.volume = musicVolume;
-			Debug.Log ("volume should be " + musicVolume);
+			Debug.Log ("volume is " + musicVolume);
 			yield return new WaitForSeconds (0.0005F);
 		}
 		StopCoroutine (fadeOut ());

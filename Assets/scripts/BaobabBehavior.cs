@@ -4,25 +4,28 @@ using System.Collections;
 public class BaobabBehavior : MonoBehaviour 
 {
 	public Material[] foliageColors;
+	AudioSource pop;
 	public Renderer rend;
 	private GameControllerBehavior controller;
 	bool isPickable = true;
+	private Coroutine coroutine;
+
 	void Start () 
 	{
-		StartCoroutine(ScaleOverTime(5));
+		coroutine = StartCoroutine(ScaleOverTime(5));
 		GameObject controllerObject = GameObject.FindWithTag ("GameController");
 		if (controllerObject != null) {
 			controller = controllerObject.GetComponent<GameControllerBehavior> ();
+			pop = controllerObject.GetComponent<AudioSource>();
 		} else {
 			Debug.Log ("Cannot find game controller...waa waa waaaaaaa");
 		}
-
+		pop.enabled = true;
 	}
 
 	void changeFoliage(Material foliageColor) {
 		Renderer[] renderers = transform.GetComponentsInChildren<Renderer>();
 		foreach(Renderer r in renderers){
-			Debug.Log (r.transform.gameObject.tag);
 			if (r.transform.gameObject.tag == "foliage") {
 				r.material = foliageColor;
 			}
@@ -32,6 +35,8 @@ public class BaobabBehavior : MonoBehaviour
 	void OnMouseDown()
 	{
 		if (isPickable) {
+			pop.Play ();
+			StopCoroutine (coroutine);
 			Destroy (gameObject);
 			controller.updateScore ();
 		}
@@ -66,7 +71,6 @@ public class BaobabBehavior : MonoBehaviour
 		isPickable = false;
 		changeFoliage (foliageColors [1]);
 		controller.updateBaobads ();
-
 	}
 
 }
