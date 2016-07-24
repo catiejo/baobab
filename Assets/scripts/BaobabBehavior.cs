@@ -12,7 +12,7 @@ public class BaobabBehavior : MonoBehaviour
 
 	void Start () 
 	{
-		coroutine = StartCoroutine(ScaleOverTime(5));
+		coroutine = StartCoroutine(ScaleOverTime(3));
 		GameObject controllerObject = GameObject.FindWithTag ("GameController");
 		if (controllerObject != null) {
 			controller = controllerObject.GetComponent<GameControllerBehavior> ();
@@ -44,7 +44,7 @@ public class BaobabBehavior : MonoBehaviour
 
 	IEnumerator ScaleOverTime(float time)
 	{
-		float girthTime = 2f;
+		float girthTime = 0.75f;
 		Vector3 babyScale = new Vector3(0.08f, 0.24f, 0.08f); // Cute little baobab
 		Vector3 saplingScale = new Vector3(0.95f, 1.0f, 0.95f); // Sapling baobab
 		Vector3 finalScale = new Vector3(1.0f, 1.0f, 1.0f); // Thicker, adult baobab
