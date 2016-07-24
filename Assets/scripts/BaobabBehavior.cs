@@ -16,7 +16,7 @@ public class BaobabBehavior : MonoBehaviour
 		GameObject controllerObject = GameObject.FindWithTag ("GameController");
 		if (controllerObject != null) {
 			controller = controllerObject.GetComponent<GameControllerBehavior> ();
-			pop = controllerObject.GetComponent<AudioSource>();
+			pop = controllerObject.GetComponents<AudioSource>()[1];
 		} else {
 			Debug.Log ("Cannot find game controller...waa waa waaaaaaa");
 		}

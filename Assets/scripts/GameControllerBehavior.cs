@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameControllerBehavior : MonoBehaviour {
 
 	public AudioSource music;
+	public AudioSource boing;
+	public AudioSource pop;
+	public RawImage lives;
+	public Texture[] livesPictures;
 	float musicVolume = 1.0F;
 	public GUIText scoreText;
 	public GameObject replayButton;
@@ -11,6 +16,7 @@ public class GameControllerBehavior : MonoBehaviour {
 	private int score;
 	private int baobads;
 	public int maxBaobads = 5;
+	private AudioSource soundEffect;
 	float nextPlant = 3.24F;
 	int spawnCount = 1;
 	int spawnBump = 12;
@@ -32,6 +38,8 @@ public class GameControllerBehavior : MonoBehaviour {
 
 	public void updateBaobads() {
 		baobads += 1;
+		lives.texture = livesPictures [Mathf.Min(4, baobads - 1)];
+		boing.Play ();
 		if (baobads >= maxBaobads) {
 			StopCoroutine (gameDifficulty ());
 			replayButton.SetActive (true);
