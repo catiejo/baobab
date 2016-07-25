@@ -10,7 +10,7 @@ public class GameControllerBehavior : MonoBehaviour {
 	public RawImage lives;
 	public Texture[] livesPictures;
 	float musicVolume = 1.0F;
-	public GUIText scoreText;
+	public Text scoreText;
 	public GameObject replayButton;
 	public PlanetBehavior planet;
 	private int score;
