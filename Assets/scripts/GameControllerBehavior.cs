@@ -8,6 +8,7 @@ public class GameControllerBehavior : MonoBehaviour {
 	public AudioSource boing;
 	public AudioSource pop;
 	public RawImage lives;
+	public RectTransform backdrop;
 	public Texture[] livesPictures;
 	float musicVolume = 1.0F;
 	public Text scoreText;
@@ -38,12 +39,12 @@ public class GameControllerBehavior : MonoBehaviour {
 
 	public void updateBaobads() {
 		baobads += 1;
-		lives.texture = livesPictures [Mathf.Min(4, baobads - 1)];
-		boing.Play ();
 		if (baobads >= maxBaobads) {
 			StopCoroutine (gameDifficulty ());
-			replayButton.SetActive (true);
-			StartCoroutine(fadeOut ());
+			StartCoroutine (fadeOut ());
+		} else {
+			boing.Play ();
+			lives.texture = livesPictures [Mathf.Min(4, baobads - 1)];
 		}
 	}
 
@@ -62,14 +63,19 @@ public class GameControllerBehavior : MonoBehaviour {
 	}
 
 	IEnumerator fadeOut () {
-		musicVolume = 0.8F;
+//		musicVolume = 0.8F;
+		Color color;
 		while (musicVolume > 0)
 		{
-			musicVolume = Mathf.Max(musicVolume - (0.15F * Time.deltaTime), 0);
+			color = backdrop.GetComponent<Image> ().color;
+			color.a += 0.003f;
+			backdrop.GetComponent<Image> ().color = color;
+			musicVolume = Mathf.Max(musicVolume - (0.25F * Time.deltaTime), 0);
 			music.volume = musicVolume;
 			Debug.Log ("volume is " + musicVolume);
-			yield return new WaitForSeconds (0.0005F);
+			yield return new WaitForSeconds (0.00075F);
 		}
+		replayButton.SetActive (true);
 		StopCoroutine (fadeOut ());
 	}
 }
