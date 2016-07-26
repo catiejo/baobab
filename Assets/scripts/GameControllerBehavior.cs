@@ -4,32 +4,31 @@ using UnityEngine.UI;
 
 public class GameControllerBehavior : MonoBehaviour {
 
-	public AudioSource music;
-	public AudioSource boing;
-	public AudioSource pop;
-	public RawImage lives;
-	public RectTransform backdrop;
-	public Texture[] livesPictures;
-	float musicVolume = 1.0F;
-	public Text scoreText;
-	public GameObject replayButton;
-	public PlanetBehavior planet;
+	private int baobabCount;
+	int plantBump = 12;
+	int plantCount = 1; // Number of baobabs spawned at a time
 	private int score;
-	private int baobads;
-	public int maxBaobads = 5;
-	private AudioSource soundEffect;
-	float nextPlant = 3.24F;
-	int spawnCount = 1;
-	int spawnBump = 12;
+
+	public AudioSource boing; // Sound effect for fully grown baobab
+	public RawImage livesRemaining;
+	public Texture[] livesPictures;
+	public AudioSource music;
+	public int maxBaobabCount = 5;
+	float musicVolume = 1.0F; // End game criteria
+	public PlanetBehavior planet;
+	public float plantRate = 3.24F;
+	public GameObject replayButton;
+	public Text scoreText;
+	public RectTransform shadow;
 
 	// Use this for initialization
 	void Start () {
 		music.Play();
 		replayButton.SetActive (false);
-		score = -1;
+		baobabCount = 0;
+		score = -1; // updateScore increments score--init to -1 so game starts with score 0
 		updateScore ();
-		baobads = 0;
-		StartCoroutine (gameDifficulty());
+		StartCoroutine (playGame());
 	}
 
 	public void updateScore() {
@@ -37,46 +36,52 @@ public class GameControllerBehavior : MonoBehaviour {
 		scoreText.text = "score: " + score;
 	}
 
-	public void updateBaobads() {
-		baobads += 1;
-		if (baobads == maxBaobads) {
+	public void updateBaobabCount() {
+		baobabCount += 1;
+		if (baobabCount == maxBaobabCount) {
+			// Game over.
 			boing.Play ();
-			StopCoroutine (gameDifficulty ());
-			StartCoroutine (fadeOut ());
-		} else if (baobads < maxBaobads) {
+			StopCoroutine (playGame ());
+			StartCoroutine (gameOver ());
+		} else if (baobabCount < maxBaobabCount) {
+			// Play boing + update # of lives
 			boing.Play ();
-			lives.texture = livesPictures [Mathf.Min(4, baobads - 1)];
+			livesRemaining.texture = livesPictures [Mathf.Min(4, baobabCount - 1)];
 		}
 	}
 
-	IEnumerator gameDifficulty () {
-		while (baobads < maxBaobads) {
-			if ((score + 1) % spawnBump == 0) {
-				spawnCount++;
-				spawnBump *= 2;
-				Debug.Log ("LEVEL UP: Spawn Count is now " + spawnCount + " at a time. Your next bump will occur at " + spawnBump + " points.");
+	IEnumerator playGame () {
+		while (baobabCount < maxBaobabCount) {
+			// Check for level up
+			// TODO: level by time, not score
+			if ((score + 1) % plantBump == 0) {
+				plantCount++;
+				plantBump *= 2;
+				Debug.Log ("LEVEL UP: Spawn Count is now " + plantCount + " at a time. Your next bump will occur at " + plantBump + " points.");
 			}
-			for (int i = 0; i < spawnCount; i++) {
+			for (int i = 0; i < plantCount; i++) {
 				planet.plantBaobab ();
 			}
-			yield return new WaitForSeconds (nextPlant);
+			yield return new WaitForSeconds (plantRate);
 		}
 	}
 
-	IEnumerator fadeOut () {
-//		musicVolume = 0.8F;
-		Color color;
+	IEnumerator gameOver () {
+		Color shadowColor;
 		while (musicVolume > 0)
 		{
-			color = backdrop.GetComponent<Image> ().color;
-			color.a += 0.003f;
-			backdrop.GetComponent<Image> ().color = color;
+			// Make shadow backdrop darker
+			shadowColor = shadow.GetComponent<Image> ().color;
+			shadowColor.a += 0.003f;
+			shadow.GetComponent<Image> ().color = shadowColor;
+			// Fade out music
 			musicVolume = Mathf.Max(musicVolume - (0.25F * Time.deltaTime), 0);
 			music.volume = musicVolume;
 			Debug.Log ("volume is " + musicVolume);
+
 			yield return new WaitForSeconds (0.00075F);
 		}
 		replayButton.SetActive (true);
-		StopCoroutine (fadeOut ());
+		StopCoroutine (gameOver ());
 	}
 }

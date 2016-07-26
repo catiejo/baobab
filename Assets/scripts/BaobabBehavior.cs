@@ -3,29 +3,31 @@ using System.Collections;
 
 public class BaobabBehavior : MonoBehaviour 
 {
-	public Material[] foliageColors;
-	AudioSource pop;
-	public Renderer rend;
 	private GameControllerBehavior controller;
-	bool isPickable = true;
 	private Coroutine coroutine;
+	public Material[] foliageColors;
+	bool isPickable = true;
+	AudioSource pop;
 
 	void Start () 
 	{
 		coroutine = StartCoroutine(ScaleOverTime(3));
+		pop.enabled = true;
+
+		//Find the game controller object in the scene
 		GameObject controllerObject = GameObject.FindWithTag ("GameController");
 		if (controllerObject != null) {
 			controller = controllerObject.GetComponent<GameControllerBehavior> ();
 			pop = controllerObject.GetComponents<AudioSource>()[1];
 		} else {
-			Debug.Log ("Cannot find game controller...waa waa waaaaaaa");
+			Debug.Log ("BaobabBehavior cannot find game controller.");
 		}
-		pop.enabled = true;
 	}
 
+	//Helper function to change the color of the leaves
 	void changeFoliage(Material foliageColor) {
-		Renderer[] renderers = transform.GetComponentsInChildren<Renderer>();
-		foreach(Renderer r in renderers){
+		Renderer[] foliageRenderers = transform.GetComponentsInChildren<Renderer>();
+		foreach(Renderer r in foliageRenderers){
 			if (r.transform.gameObject.tag == "foliage") {
 				r.material = foliageColor;
 			}
@@ -57,9 +59,9 @@ public class BaobabBehavior : MonoBehaviour
 			currentTime += Time.deltaTime;
 			yield return null;
 		} while (currentTime <= time);
-		changeFoliage (foliageColors [0]);
 
-		// Reset time and grow the girth
+		// Reset time and grow the girth (change foliage to indicate it's almost fully grown)
+		changeFoliage (foliageColors [0]);
 		currentTime = 0.0f;
 		do
 		{
@@ -68,9 +70,10 @@ public class BaobabBehavior : MonoBehaviour
 			yield return null;
 		} while (currentTime <= girthTime);
 
+		// Baobab is fully grown
 		isPickable = false;
 		changeFoliage (foliageColors [1]);
-		controller.updateBaobads ();
+		controller.updateBaobabCount ();
 	}
 
 }
