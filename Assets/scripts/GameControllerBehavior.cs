@@ -39,10 +39,11 @@ public class GameControllerBehavior : MonoBehaviour {
 
 	public void updateBaobads() {
 		baobads += 1;
-		if (baobads >= maxBaobads) {
+		if (baobads == maxBaobads) {
+			boing.Play ();
 			StopCoroutine (gameDifficulty ());
 			StartCoroutine (fadeOut ());
-		} else {
+		} else if (baobads < maxBaobads) {
 			boing.Play ();
 			lives.texture = livesPictures [Mathf.Min(4, baobads - 1)];
 		}
