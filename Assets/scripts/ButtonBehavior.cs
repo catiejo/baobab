@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class ButtonBehavior : MonoBehaviour {
 	public void LoadStage()  {
-		Application.LoadLevel ("game");
+		SceneManager.LoadScene("game");
 	}
 }
