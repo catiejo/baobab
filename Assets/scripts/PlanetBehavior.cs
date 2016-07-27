@@ -4,17 +4,15 @@ using System.Collections;
 public class PlanetBehavior : MonoBehaviour 
 {
 	public Transform baobab;
-
-	int maxAttempts = 50;
+	int maxPlantAttempts = 50;
 
 	public void plantBaobab ()
 	{
 		int plantAttempts = 0;
 		Vector3 emptySpot = Random.onUnitSphere * (0.5f);
 
-		while (plantAttempts < maxAttempts) {
-			//This OverlapSphere isn't working...why?
-			if (Physics.OverlapSphere (transform.TransformPoint(emptySpot), 0.3F).Length <= 1) {
+		while (plantAttempts < maxPlantAttempts) {
+			if (Physics.OverlapSphere (transform.TransformPoint(emptySpot), 0.5F).Length <= 1) {
 				Transform newBaobab = Instantiate (baobab) as Transform;
 				newBaobab.parent = gameObject.transform;
 				newBaobab.localPosition = emptySpot;

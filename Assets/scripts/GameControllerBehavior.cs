@@ -9,14 +9,14 @@ public class GameControllerBehavior : MonoBehaviour {
 	private int score;
 
 	public AudioSource boing; // Sound effect for fully grown baobab
-	public float levelRate = 35.0F;
+	public float levelRate = 35.0F; // Timed to repetition of the music
 	public RawImage livesRemaining;
 	public Texture[] livesPictures;
 	public AudioSource music;
 	public int maxBaobabCount = 5;
 	float musicVolume = 1.0F; // End game criteria
 	public PlanetBehavior planet;
-	public float plantRate = 1.62F;
+	public float plantRate = 1.62F; // Timed to repetition of the music
 	public GameObject replayButton;
 	public Text scoreText;
 	public RectTransform shadow;
