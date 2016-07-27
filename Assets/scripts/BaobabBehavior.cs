@@ -12,7 +12,6 @@ public class BaobabBehavior : MonoBehaviour
 	void Start () 
 	{
 		coroutine = StartCoroutine(ScaleOverTime(3));
-		pop.enabled = true;
 
 		//Find the game controller object in the scene
 		GameObject controllerObject = GameObject.FindWithTag ("GameController");
