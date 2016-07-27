@@ -5,18 +5,18 @@ using UnityEngine.UI;
 public class GameControllerBehavior : MonoBehaviour {
 
 	private int baobabCount;
-	int plantBump = 12;
 	int plantCount = 1; // Number of baobabs spawned at a time
 	private int score;
 
 	public AudioSource boing; // Sound effect for fully grown baobab
+	public float levelRate = 33.0F;
 	public RawImage livesRemaining;
 	public Texture[] livesPictures;
 	public AudioSource music;
 	public int maxBaobabCount = 5;
 	float musicVolume = 1.0F; // End game criteria
 	public PlanetBehavior planet;
-	public float plantRate = 3.24F;
+	public float plantRate = 1.62F;
 	public GameObject replayButton;
 	public Text scoreText;
 	public RectTransform shadow;
@@ -43,26 +43,34 @@ public class GameControllerBehavior : MonoBehaviour {
 			boing.Play ();
 			StopCoroutine (playGame ());
 			StartCoroutine (gameOver ());
-		} else if (baobabCount < maxBaobabCount) {
+		} else if (!tooManyTrees()) {
 			// Play boing + update # of lives
 			boing.Play ();
 			livesRemaining.texture = livesPictures [Mathf.Min(4, baobabCount - 1)];
 		}
 	}
 
+	bool tooManyTrees () {
+		return baobabCount >= maxBaobabCount;
+	}
+
 	IEnumerator playGame () {
-		while (baobabCount < maxBaobabCount) {
-			// Check for level up
-			// TODO: level by time, not score
-			if ((score + 1) % plantBump == 0) {
-				plantCount++;
-				plantBump *= 2;
-				Debug.Log ("LEVEL UP: Spawn Count is now " + plantCount + " at a time. Your next bump will occur at " + plantBump + " points.");
-			}
+		StartCoroutine (levelUp());
+		while (!tooManyTrees()) {
 			for (int i = 0; i < plantCount; i++) {
 				planet.plantBaobab ();
 			}
 			yield return new WaitForSeconds (plantRate);
+		}
+	}
+
+	IEnumerator levelUp() {
+		Debug.Log ("levelUp() has been started");
+		while (!tooManyTrees ()) {
+			Debug.Log ("waiting for " + levelRate + " seconds.");
+			yield return new WaitForSeconds (levelRate);
+			plantCount++;
+			Debug.Log ("LEVEL UP: Baobabs will grow " + plantCount + " at a time.");
 		}
 	}
 
