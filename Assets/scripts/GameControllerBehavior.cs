@@ -9,7 +9,7 @@ public class GameControllerBehavior : MonoBehaviour {
 	private int score;
 
 	public AudioSource boing; // Sound effect for fully grown baobab
-	public float levelRate = 33.0F;
+	public float levelRate = 35.0F;
 	public RawImage livesRemaining;
 	public Texture[] livesPictures;
 	public AudioSource music;
@@ -38,6 +38,7 @@ public class GameControllerBehavior : MonoBehaviour {
 
 	public void updateBaobabCount() {
 		baobabCount += 1;
+		livesRemaining.texture = livesPictures [Mathf.Min(4, baobabCount - 1)];
 		if (baobabCount == maxBaobabCount) {
 			// Game over.
 			boing.Play ();
@@ -46,7 +47,6 @@ public class GameControllerBehavior : MonoBehaviour {
 		} else if (!tooManyTrees()) {
 			// Play boing + update # of lives
 			boing.Play ();
-			livesRemaining.texture = livesPictures [Mathf.Min(4, baobabCount - 1)];
 		}
 	}
 
