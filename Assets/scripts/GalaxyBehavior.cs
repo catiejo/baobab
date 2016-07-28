@@ -3,17 +3,11 @@ using System.Collections;
 
 public class GalaxyBehavior : MonoBehaviour 
 {
-	private float _sensitivity;
+	public float _sensitivity = 0.4f;
 	private Vector3 _mouseReference;
 	private Vector3 _mouseOffset;
-	private Vector3 _rotation;
+	private Vector3 _rotation = Vector3.zero;
 	private bool _isRotating;
-
-	void Start ()
-	{
-		_sensitivity = 0.4f;
-		_rotation = Vector3.zero;
-	}
 
 	void Update()
 	{
@@ -32,7 +26,7 @@ public class GalaxyBehavior : MonoBehaviour
 			_rotation.y = -(_mouseOffset.x) * _sensitivity;
 			_rotation.x = (_mouseOffset.y) * _sensitivity;
 			transform.Rotate(_rotation, relativeTo:Space.World);
-			// Store mouse
+			// Store mouse position
 			_mouseReference = Input.mousePosition;
 		}
 	}
