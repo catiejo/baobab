@@ -7,3 +7,4 @@ AssetTests
 *.sln
 arracher_des_baobabs_desktop.app/
 arracher_des_baobabs/
+.DS_Store
